@@ -16,7 +16,7 @@ const PROTOCOL = "tcp";
 const PORT = "8585";
 const IP_ADDR = "0.0.0.0";
 
-const FEEDNAMES = ["tracking-fast", "tracking-fast-refs"];
+const FEEDNAMES = ["tracking-pose"];
 
 async function main(opts: Opts): Promise<void> {
   const clientFolder = await setupFolder(opts.folderName);
@@ -34,10 +34,8 @@ async function main(opts: Opts): Promise<void> {
 }
 
 function generateTopicName(feedName: string, gameId: string): string {
-  if (feedName === "tracking-fast") {
-    return `flex_cv_tracks_${gameId}`;
-  } else if (feedName === "tracking-fast-refs") {
-    return `flex_cv_tracks_refs_${gameId}`;
+  if (feedName === "tracking-pose") {
+    return `flex_cv_pose_${gameId}`;
   } else {
     throw Error(`Unknown feedname ${feedName} found`);
   }
@@ -72,7 +70,7 @@ yargs
       feedName: {
         type: "string",
         demandOption: true,
-        default: "tracking-fast",
+        default: "tracking-pose",
         choices: FEEDNAMES,
       },
     },
