@@ -6,6 +6,10 @@ import * as zmq from "zeromq";
 import Recorder from "./record";
 
 export interface Opts {
+  /// ZMQ Configuration
+  address: string;
+  port: number;
+
   gameId: string;
   folderName: string;
   feedName: string;
@@ -13,8 +17,6 @@ export interface Opts {
 
 // Constants
 const PROTOCOL = "tcp";
-const PORT = "8585";
-const IP_ADDR = "0.0.0.0";
 
 const FEEDNAMES = ["tracking-pose"];
 
@@ -23,7 +25,7 @@ async function main(opts: Opts): Promise<void> {
   const recorder = new Recorder(clientFolder);
 
   let socket = zmq.socket("sub");
-  socket.connect(`${PROTOCOL}://${IP_ADDR}:${PORT}`);
+  socket.connect(`${PROTOCOL}://${opts.address}:${opts.port}`);
   socket.subscribe(generateTopicName(opts.feedName, opts.gameId));
 
   let messageNumber = 1;
@@ -73,6 +75,9 @@ yargs
         default: "tracking-pose",
         choices: FEEDNAMES,
       },
+      // optional args
+      address: { type: "string", default: "0.0.0.0" },
+      port: { type: "number", default: 8585 },
     },
     main
   )
