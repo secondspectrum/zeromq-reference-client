@@ -2,6 +2,12 @@
 
 Zero MQ Reference Client -- Typescript
 
+## Setup
+```bash
+npm i
+npm install -g ts-node
+```
+
 ## Sample command
 
 ```
