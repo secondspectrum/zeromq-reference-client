@@ -18,7 +18,7 @@ export interface Opts {
 // Constants
 const PROTOCOL = "tcp";
 
-const FEEDNAMES = ["tracking-pose", "tracking-pose-fast"];
+const FEEDNAMES = ["tracking-pose", "tracking-pose-prime"];
 
 async function main(opts: Opts): Promise<void> {
   const clientFolder = await setupFolder(opts.folderName);
@@ -38,8 +38,8 @@ async function main(opts: Opts): Promise<void> {
 function generateTopicName(feedName: string, gameId: string): string {
   if (feedName === "tracking-pose") {
     return `flex_cv_pose_${gameId}`;
-  } else if (feedName === "tracking-pose-fast") {
-    return `flex_cv_pose_fast_${gameId}`;
+  } else if (feedName === "tracking-pose-prime") {
+    return `flex_cv_pose_prime_${gameId}`;
   } else {
     throw Error(`Unknown feedname ${feedName} found`);
   }
