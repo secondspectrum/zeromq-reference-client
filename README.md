@@ -36,6 +36,8 @@ ts-node src/index.ts record \
 ```
 
 The availble feeds are:
+* `tracking-fast`: High-quality tracking data at a slight delay
+* `tracking-fast-prime`: Low-latency tracking data
 * `tracking-pose`: High-quality pose data at a slight delay
 * `tracking-pose-prime`: Low-latency pose data
 
